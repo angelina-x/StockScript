@@ -40,4 +40,8 @@ url = "https://data.eastmoney.com/zjlx/000008.html"
 response = requests.get(url,headers=headers)#发起请求得到响应
 response.encoding = "utf-8"
 text = response.text#返回一个经过解码的字符串
-print(text)
+#print(text)
+
+comments_list = [i for i in re.findall('<tr>(.*?)</tr>',text,re.S)]
+
+print(comments_list)
