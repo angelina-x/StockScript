@@ -5,8 +5,9 @@ import chardet
 import re
 from lxml import etree
 import csv
+from selenium import webdriver
 
-class ReadConfigFile(object):
+class Demo(object):
     def read_config(self):
         conn = ConfigParser()
         file_path = os.path.join(os.path.abspath('.'),'configuration.ini') #os.path.join(os.getcwd(),'configuration.ini')
@@ -40,10 +41,15 @@ class ReadConfigFile(object):
 
         #取得页面数据，数值部分没法获取
         tr_list = [i for i in re.findall('<tr>(.*?)</tr>',text,re.S)]
+        # print(tr_list)
 
-        print(tr_list)
+        bro=webdriver.Chrome(executable_path=r'D:\tmp\chromedriver_win32\chromedriver.exe')
+        #bro.get('https://data.eastmoney.com/zjlx/000008.html')
+        bro.get('https://data.eastmoney.com/zjlx/detail.html')
+        page_text=bro.page_source
+        print(page_text)
 
-rc = ReadConfigFile()
-print(rc.fetchStockData())
+d = Demo()
+print(d.fetchStockData())
 
 
