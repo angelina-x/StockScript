@@ -26,7 +26,7 @@ class Demo(object):
         receivers=conn.get('email','receivers').split(',')
         return [mail_host,mail_user,mail_pass,sender,receivers] 
         
-    def fetchStockData(self):
+    def fetchStockData1(self):
         headers = {
             'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36',
             #在爬虫里面如果出现了Referer最好也粘上去，因为有时候服务器会根据Referer来判断请求时由浏览器还是爬虫发出的
@@ -39,15 +39,22 @@ class Demo(object):
         text = response.text#返回一个经过解码的字符串
         #print(text)
 
-        #取得页面数据，数值部分没法获取
+        #取得页面数据，数值部分没法获取，放弃这种方法
         tr_list = [i for i in re.findall('<tr>(.*?)</tr>',text,re.S)]
         # print(tr_list)
 
+    def fetchStockData(self):
         bro=webdriver.Chrome(executable_path=r'D:\tmp\chromedriver_win32\chromedriver.exe')
         #bro.get('https://data.eastmoney.com/zjlx/000008.html')
         bro.get('https://data.eastmoney.com/zjlx/detail.html')
         page_text=bro.page_source
-        print(page_text)
+        #print(page_text)
+
+        tree=etree.HTML(page_text)
+        tree1=tree.xpath('//table/tbody/tr[1]//text()')
+
+        for i in range(len(tree1)):
+            print(tree1[i])
 
 d = Demo()
 print(d.fetchStockData())
