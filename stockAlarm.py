@@ -51,10 +51,12 @@ class Demo(object):
         #print(page_text)
 
         tree=etree.HTML(page_text)
-        tree1=tree.xpath('//table/tbody/tr[1]//text()')
+        tree1=tree.xpath('//table/tbody/tr')
 
         for i in range(len(tree1)):
-            print(tree1[i])
+            data=tree1[i].xpath('.//text()')
+            tup1=(data[0],data[1],data[2],data[8],data[9],data[10],data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19])
+            print(tup1)
 
 d = Demo()
 print(d.fetchStockData())
