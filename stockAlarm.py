@@ -5,6 +5,7 @@ import chardet
 import re
 from lxml import etree
 import csv
+import time
 from selenium import webdriver
 
 class Demo(object):
@@ -25,7 +26,13 @@ class Demo(object):
         sender=conn.get('email','sender')
         receivers=conn.get('email','receivers').split(',')
         return [mail_host,mail_user,mail_pass,sender,receivers] 
-        
+
+    def saveData(self,data):
+        date=time.strftime('%Y_%m_%d')
+        path=open('D:\File\stock\\'+date+ '_test.csv','w',encoding='utf-8',newline='') #notice:\'
+        writer=csv.writer(path,delimiter=',')
+        writer.writerows(data) #乱码数据不准
+
     def fetchStockData1(self):
         headers = {
             'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36',
@@ -56,7 +63,10 @@ class Demo(object):
         for i in range(len(tree1)):
             data=tree1[i].xpath('.//text()')
             tup1=(data[0],data[1],data[2],data[8],data[9],data[10],data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19])
-            print(tup1)
+            # print(tup1)
+            self.saveData(data)
+
+
 
 d = Demo()
 print(d.fetchStockData())
