@@ -64,7 +64,7 @@ class Demo(object):
             data=tree1[i].xpath('.//text()')
             tup1=(data[0],data[1],data[2],data[8],data[9],data[10],data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19])
             # print(tup1)
-            self.saveData(data)
+            self.saveData(data) #同一类中的函数必须传入self作为第一参数，调用方法时用self.函数名
 
 
 
