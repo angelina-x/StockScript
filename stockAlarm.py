@@ -51,7 +51,7 @@ class Demo(object):
         # print(tr_list)
 
     def fetchStockData(self):
-        bro=webdriver.Chrome(executable_path=r'D:\tmp\chromedriver_win32\chromedriver.exe')
+        bro=webdriver.Chrome(executable_path=r'chromedriver.exe')
         #bro.get('https://data.eastmoney.com/zjlx/000008.html')
         bro.get('https://data.eastmoney.com/zjlx/detail.html')
         page_text=bro.page_source
