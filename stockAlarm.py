@@ -29,9 +29,9 @@ class Demo(object):
 
     def saveData(self,data):
         date=time.strftime('%Y_%m_%d')
-        path=open('D:\File\stock\\'+date+ '_test.csv','w',encoding='utf-8',newline='') #notice:\'
+        path=open('D:\File\stock\\'+date+ '_test.csv','w',encoding='utf-8-sig',newline='') #notice:\'
         writer=csv.writer(path,delimiter=',')
-        writer.writerows(data) #乱码数据不准
+        writer.writerows(data)
 
     def fetchStockData1(self):
         headers = {
